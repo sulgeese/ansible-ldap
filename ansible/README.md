@@ -24,8 +24,8 @@
 1.  **Клонируйте репозиторий**:
 
     ```bash
-    git clone <repository_url> ansible-ldap-automation
-    cd ansible-ldap-automation
+    git clone https://github.com/sulgeese/ansible-ldap.git ansible-ldap
+    cd ansible-ldap
     ```
 
 2.  **Настройте Inventory**:
