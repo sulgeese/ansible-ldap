@@ -48,12 +48,12 @@
 
     В файле `ansible/roles/openldap/vars/main.yml`:
 
-    *   `ldap_admin_password`: Замените на надежный пароль для администратора LDAP (по умолчанию, `зфыыцщкв`).
+    *   `ldap_admin_password`: Замените на надежный пароль для администратора LDAP (по умолчанию, `password`).
     *   `ldap_domain`: Замените на ваш домен (по умолчанию, `example.com`).
     *   `ldap_organization`: Замените на название вашей организации (по умолчанию, `organization`).
 
 
-    **Описание других переменных (пользователи, группы) подробнее см. в `roles/openldap/README.md`.**
+    **Описание других переменных (пользователи, группы) подробнее см. в [openldap/README.md](ansible/roles/openldap/README.md).**
 
 ## Запуск плейбука
 
@@ -64,7 +64,9 @@ ansible-playbook playbook.yml
 
 ## Запуск тестового сервера с Ubuntu:22.04
 
-**Для выполнения этой команды должен быть установлен Docker и Docker Compose.**
+> [!warning]
+> **Для выполнения этой команды должен быть установлен Docker и Docker Compose.**
+
 
 ```bash
 docker compose up -d
