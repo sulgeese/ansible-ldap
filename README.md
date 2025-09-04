@@ -71,3 +71,11 @@ ansible-playbook playbook.yml
 ```bash
 docker compose up -d
 ```
+
+## Итоговый результат LDAP Directory Tree
+
+#### Сырой
+![Скриншот запуска тестового сервера](screen.png)
+
+#### Преобразованный
+![Скриншот запуска тестового сервера](screen2.png)
