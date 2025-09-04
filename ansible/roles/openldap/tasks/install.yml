@@ -1,0 +1,19 @@
+---
+- name: Update Package List
+  ansible.builtin.apt:
+    update_cache: yes
+    state: present
+
+- name: Install python3-ldap
+  ansible.builtin.apt:
+    name:
+      - python3-ldap
+    state: present
+
+- name: Install LDAP Packages
+  ansible.builtin.apt:
+    name:
+      - debconf-utils
+      - slapd
+      - ldap-utils
+    state: present

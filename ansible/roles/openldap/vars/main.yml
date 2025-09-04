@@ -1,0 +1,5 @@
+---
+ldap_admin_password: password
+ldap_domain: example.com
+ldap_organization: oranization
+ldap_base: "dc={{ ldap_domain.split('.')[0] }},dc={{ ldap_domain.split('.')[1] }}"

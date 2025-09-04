@@ -1,0 +1,15 @@
+---
+- block:
+    - name: Install LDAP Packages
+      import_tasks: install.yml
+  when: ansible_distribution == 'Ubuntu'
+
+- block:
+    - name: Configure LDAP
+      import_tasks: configure.yml
+  when: ansible_distribution == 'Ubuntu'
+
+- block:
+    - name: Create LDAP Entries
+      import_tasks: create_entries.yml
+  when: ansible_distribution == 'Ubuntu'

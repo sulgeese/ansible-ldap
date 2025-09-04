@@ -1,0 +1,58 @@
+---
+- name: Set debconf settings for Slapd
+  ansible.builtin.debconf:
+    name: slapd
+    question: "{{ item.question }}"
+    value: "{{ item.value }}"
+    vtype: "{{ item.type }}"
+  loop:
+    - {
+        question: "slapd/password1",
+        type: "password",
+        value: "{{ ldap_admin_password }}",
+      }
+    - {
+        question: "slapd/internal/adminpw",
+        type: "password",
+        value: "{{ ldap_admin_password }}",
+      }
+    - {
+        question: "slapd/internal/generated_adminpw",
+        type: "string",
+        value: "{{ ldap_admin_password }}",
+      }
+    - {
+        question: "slapd/password2",
+        type: "password",
+        value: "{{ ldap_admin_password }}",
+      }
+    - {
+        question: "slapd/root_password",
+        type: "password",
+        value: "{{ ldap_admin_password }}",
+      }
+    - {
+        question: "slapd/root_password_again",
+        type: "password",
+        value: "{{ ldap_admin_password }}",
+      }
+    - {
+        question: "shared/organization",
+        type: "string",
+        value: "{{ ldap_organization }}b",
+      }
+    - { question: "slapd/domain", type: "string", value: "{{ ldap_domain }}" }
+    - { question: "slapd/move_old_database", type: "boolean", value: "true" }
+    - { question: "slapd/purge_database", type: "boolean", value: "false" }
+  no_log: true
+
+- name: Reconfigure slapd
+  ansible.builtin.shell:
+    cmd: dpkg-reconfigure slapd
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+
+- name: Start slapd
+  ansible.builtin.service:
+    name: slapd
+    state: started

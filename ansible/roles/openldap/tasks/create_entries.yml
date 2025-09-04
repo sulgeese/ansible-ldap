@@ -1,0 +1,55 @@
+---
+- name: Create OU for users
+  community.general.ldap_entry:
+    dn: "ou=users,{{ ldap_base }}"
+    objectClass:
+      - organizationalUnit
+    attributes:
+      ou: users
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base }}"
+    bind_pw: "{{ ldap_admin_password }}"
+
+- name: Create OU for groups
+  community.general.ldap_entry:
+    dn: "ou=groups,{{ ldap_base }}"
+    objectClass:
+      - organizationalUnit
+    attributes:
+      ou: groups
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base }}"
+    bind_pw: "{{ ldap_admin_password }}"
+
+- name: Create LDAP users
+  community.general.ldap_entry:
+    dn: "uid={{ item.username }},ou=users,{{ ldap_base }}"
+    objectClass:
+      - inetOrgPerson
+      - PosixAccount
+      - ShadowAccount
+    attributes:
+      cn: "{{ item.username }}"
+      sn: "{{ item.surname }}"
+      uid: "{{ item.givenname }}"
+      uidNumber: "{{ item.uidNumber }}"
+      gidNumber: "{{ item.gidNumber }}"
+      userPassword: "{{ item.password }}"
+      homeDirectory: "/home/{{ item.username }}"
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base }}"
+    bind_pw: "{{ ldap_admin_password }}"
+  loop: "{{ ldap_users }}"
+
+- name: Create LDAP groups
+  community.general.ldap_entry:
+    dn: "cn={{ item.groupname }},ou=groups,{{ ldap_base }}"
+    objectClass:
+      - PosixGroup
+    attributes:
+      cn: "{{ item.groupname }}"
+      gidNumber: "{{ item.gidNumber }}"
+    server_uri: ldap://localhost/
+    bind_dn: "cn=admin,{{ ldap_base }}"
+    bind_pw: "{{ ldap_admin_password }}"
+  loop: "{{ ldap_groups }}"

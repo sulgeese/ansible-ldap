@@ -1,0 +1,15 @@
+services:
+  ubuntu:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 22:22
+      - 389:389
+      - 636:636
+  ansible:
+    image: alpine/ansible:latest
+    volumes:
+      - ./ansible:/ansible/
+    working_dir: /ansible
+    command: ansible-playbook playbook.yml

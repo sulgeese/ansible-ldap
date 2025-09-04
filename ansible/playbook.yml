@@ -1,0 +1,6 @@
+---
+- name: Configure OpenLDAP server
+  hosts: ldap_servers
+  become: true
+  roles:
+    - role: openldap

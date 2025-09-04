@@ -1,0 +1,20 @@
+---
+ldap_groups:
+  - groupname: "developers"
+    gidNumber: 5001
+  - groupname: "managers"
+    gidNumber: 5002
+
+ldap_users:
+  - username: user1
+    password: "password1"
+    givenname: "Jack"
+    surname: "Black"
+    uidNumber: 5001
+    gidNumber: 5001
+  - username: user2
+    password: "password2"
+    givenname: "Kyle"
+    surname: "Gass"
+    uidNumber: 5002
+    gidNumber: 5002
